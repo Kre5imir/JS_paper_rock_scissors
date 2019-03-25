@@ -1,0 +1,91 @@
+<html>
+<head>
+</head>
+<body>
+<form>
+	Select your weapon:
+	<select id ="selection">
+		
+		<option value="rock">Rock</option>
+		<option value="paper">Paper</option>
+		<option value="scissors">Scissors</option>
+	</select>
+</form>
+<p id= "txt1"></p>
+	<p id= "txt2"></p>
+	<p id= "res"></p>
+	<p id= "res5"></p>
+	<p id= "res6"></p>
+	<p id= "overall"></p>
+<button type="button" onclick="play()">Play</button>
+<div id = "window1"></div>
+<script>
+	let bla = document.querySelector("#res5");
+	let bla2 = document.querySelector("#res6");
+	let player = 0;
+	let computer = 0;
+	
+
+	function compSelection(){
+		let choice = ["rock","paper","scissors"];
+		let option = choice[Math.floor(Math.random() * choice.length)];
+		return option;
+	}
+	function play(){
+		let x = document.querySelector("#selection").value;
+		let cp = compSelection();
+		document.querySelector("#txt2").textContent = "computer choose " + cp;
+		if (cp == x){
+			document.querySelector("#res").textContent = "tie!!";
+		}
+		else if (x == "rock" && cp == "scissors" ||
+           x == "paper" && cp == "rock" ||
+           x == "scissors" && cp == "paper") {
+        player++;
+    	document.querySelector("#res").textContent = 'it is a win!! ';
+    	bla.textContent = `${player}`;
+    	}
+    	else{
+    		document.querySelector("#res").textContent = 'it is a loose!! ';
+    		computer++
+    		bla2.textContent = `${computer}`;
+    	}  		
+  		scores();	
+  	}
+  	
+    function scores(){	
+  		if (player >= 3){
+			document.querySelector("#overall").textContent =  `you win in total games`;
+  		endGame();
+  		}
+  		else if (computer >= 3){document.querySelector("#overall").textContent = " you lost in total games"; 
+  		endGame();
+  		}
+  		
+  	}
+  	function endGame(){
+  		let window1 = document.querySelector("#window1");
+  		let reset = document.createElement("BUTTON");
+  		let heyTxt = document.createTextNode("Reset game");
+  		reset.appendChild(heyTxt);
+  		window1.appendChild(reset);
+
+  		reset.addEventListener('click', function (){
+  			resetScores();
+  			window1.removeChild(reset);
+  		});
+  		//x.disabled = true;
+  	}
+  		
+
+  	function resetScores(){
+  		player = 0;
+  		computer = 0;
+  		bla.textContent = `${player}`;
+  		bla2.textContent = `${computer}`;
+  		};
+	
+</script>
+</body>
+
+</html>
